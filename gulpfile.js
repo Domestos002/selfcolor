@@ -13,8 +13,8 @@ var gulp = require('gulp'),
     callback = require('gulp-callback'),
     clean = require('gulp-clean'),
     notify = require('gulp-notify'),
-    browserSync = require('browser-sync'),
-    compass = require('gulp-compass');
+    browserSync = require('browser-sync');
+    // compass = require('gulp-compass');
 
 /* PRODUCTION PLUGINS ----------------------------------------------------------
  ---------------------------------------------------------------------------- */
@@ -110,27 +110,27 @@ gulp.task('twig', function () {
     return null;
 });
 
-/* COMPASS ------------------------------------------------------------------ */
-gulp.task('compass', function () {
-    gulp.src(sources.sass.watch)
-        .pipe(plumber())
-        .pipe(compass({
-            sass: sources.sass.dist,
-            css: sources.css.dist,
-            js: sources.js.dist,
-            image: 'app/images',
-            source: true
-        }))
-        .pipe(prefix({
-            browsers: ['last 2 versions'],
-            cascade: false
-        }))
-        .pipe(gulp.dest(sources.css.dist))
-        .pipe(browserSync.reload({stream: true}));
-});
+// /* COMPASS ------------------------------------------------------------------ */
+// gulp.task('compass', function () {
+//     gulp.src(sources.sass.watch)
+//         .pipe(plumber())
+//         .pipe(compass({
+//             sass: sources.sass.dist,
+//             css: sources.css.dist,
+//             js: sources.js.dist,
+//             image: 'app/images',
+//             source: true
+//         }))
+//         .pipe(prefix({
+//             browsers: ['last 2 versions'],
+//             cascade: false
+//         }))
+//         .pipe(gulp.dest(sources.css.dist))
+//         .pipe(browserSync.reload({stream: true}));
+// });
 
 /* SASS --------------------------------------------------------------------- */
-gulp.task('sass', ["compass"], function () {
+gulp.task('sass', function () {
     return gulp.src(sources.sass.src)
         .pipe(plumber({
             errorHandler: onError
@@ -233,11 +233,11 @@ gulp.task('images', function () {
  ---------------------------------------------------------------------------- */
 gulp.task('watch', function () {
     // gulp.watch('bower.json', ["bower"]);
-    gulp.watch(sources.sass.watch, ['compass']);
+    gulp.watch(sources.sass.watch);
     // gulp.watch(sources.pug.watch, ["pug"]);
     gulp.watch(sources.twig.watch, ["twig"]);
     gulp.watch(sources.js.es6_watch, ['es6']);
     gulp.watch(sources.js.watch).on('change', browserSync.reload);
 });
 
-gulp.task('default', ['browser-sync', 'es6', 'twig', 'compass', 'watch']);
+gulp.task('default', ['browser-sync', 'es6', 'twig', 'watch']);

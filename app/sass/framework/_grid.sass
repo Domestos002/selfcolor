@@ -1,59 +1,47 @@
-.fw-grid
-  display: flex
-  flex-wrap: wrap
+.container
+	margin: 0 auto
+	max-width: $content-width
+	padding: $content-indent
 
-.fw-grid-middle
-  align-items: center
+.container-fluid
+	padding: $content-indent
+	width: 100%
 
-.fw-grid-bottom
-  align-items: center
+.grid
+	display: flex
+	flex-wrap: wrap
 
-@each $value in 0, 15, 20, 30, 40, 50
-  .fw-grid-#{$value}
-    margin-left: -#{$value}px
-    margin-bottom: -#{$value}px
+.grid-middle
+	align-items: center
+	
+@each $value in '1-12_8.333', '2-12_16.666', '3-12_25', '4-12_33.333', '5-12_41.666', '6-12_50', '7-12_58.333', '8-12_66.666', '9-12_75', '10-12_83.333', '11-12_91.666'
+	$values: str_split('#{$value}', '_')
+	$width: nth($values, 2)
+	$widthName: nth($values, 1)
+	
+	.width-#{$widthName}
+		width: unquote("#{$width}%")
+	
+	.sm-width-#{$widthName}
+		+respond-to(sm)
+			width: unquote("#{$width}%")
+	
+	.md-width-#{$widthName}
+		+respond-to(md)
+			width: unquote("#{$width}%")
+	
+	.lg-width-#{$widthName}
+		+respond-to(lg)
+			width: unquote("#{$width}%")
+	
+	.xlg-width-#{$widthName}
+		+respond-to(xlg)
+			width: unquote("#{$width}%")
 
-    & > *
-      box-sizing: border-box
-      padding-left: #{$value}px
-      margin-bottom: #{$value}px
 
-  .fw-grid-#{$value}\@xs
-    @media screen and (min-width: $extraSmall)
-      margin-left: -#{$value}px
-      margin-bottom: -#{$value}px
 
-      & > *
-        box-sizing: border-box
-        padding-left: #{$value}px
-        margin-bottom: #{$value}px
 
-  .fw-grid-#{$value}\@s
-    @media screen and (min-width: $small)
-      margin-left: -#{$value}px
-      margin-bottom: -#{$value}px
 
-      & > *
-        box-sizing: border-box
-        padding-left: #{$value}px
-        margin-bottom: #{$value}px
 
-  .fw-grid-#{$value}\@m
-    @media screen and (min-width: $medium)
-      margin-left: -#{$value}px
-      margin-bottom: -#{$value}px
 
-      & > *
-        box-sizing: border-box
-        padding-left: #{$value}px
-        margin-bottom: #{$value}px
 
-  .fw-grid-#{$value}\@l
-    @media screen and (min-width: $large)
-      margin-left: -#{$value}px
-      margin-bottom: -#{$value}px
-
-      & > *
-        box-sizing: border-box
-        padding-left: #{$value}px
-        margin-bottom: #{$value}px
