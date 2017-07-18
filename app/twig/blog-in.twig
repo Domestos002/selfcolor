@@ -9,7 +9,7 @@
                 <div class="section-inner">
                     <div class="blog-in">
                         <div class="blog-in-header fx fx-justify fx-middle">
-                            <div class="blog-in__author fx fx-left">
+                            <div class="blog-in__author fx fx-left fx-middle">
                                 <span class="blog-author-img mr-20">
                                     <img src="http://lorempixel.com/40/40" alt="">
                                 </span>
@@ -25,7 +25,75 @@
                                     </div>
                                 </div>
                             </div>
-                            {% include "elements/blog-masonry-index.twig"%}
+                            {% include "elements/blog-masonry-index.twig" %}
+                        </div>
+                        <div class="blog-in-body">
+                            <div class="blog-in__hero">
+                                <div class="blog-in__hero-contain">
+                                    <span class="blog-in__date fz12 mb-30">
+                                        21.11.2016
+                                    </span>
+                                    <div class="fz36 text-bold text-center text-white">
+                                        <p>Тибетские монахи знают
+                                            толк в татуировках</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="blog-in__text-block text-paragraph">
+                                <p>Многим интересно как происходит процесс татуировки. Собравшись с силами, пригласив
+                                    отличного фотографа, решил показать - как это делается! Итак, мы в тату-салоне. Моя
+                                    модель, Даша готова. Графическую составляющую мы выбрали и с этим не было проблем.
+                                    Мы с Дашей сразу поняли чего хотим получить в итоге. Начинаем процесс переноса
+                                    выбранного рисунка. Накладываем на, так называемую, трансферную бумагу (некое
+                                    подобие копирки) и обрисовываю необходимые контуры и тени.</p>
+                            </div>
+                            <div class="blog-in__gallery-block fx">
+                                {% for 1 in 1..4 %}
+                                    <div class="blog-in__gallery-item-wrapper">
+                                        <div class="blog-in__gallery-item">
+                                            <img src="http://lorempixel.com/460/310" alt="">
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="blog-in__text-block text-paragraph">
+                                <p>Кожа клиента предварительно обрабатывается спиртовой салфеткой для удаления грязи с
+                                    ее поверхности, тем самым мы обезопасим клиента от возможного заражения. Наносим на
+                                    кожу клиента тонкий слой раствора зеленого антибактериального мыла, иногда для
+                                    переноса используются различные средства или гели.
+                                </p>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur consequatur eum provident sunt ullam velit!
+                                </p>
+                            </div>
+                            <div class="blog-in__img">
+                                <img src="http://lorempixel.com/930/580/" alt="">
+                            </div>
+                            <div class="blog-in__share">
+                                <div class="blog-in__share-left">
+                                    <p>Поделиться:</p>
+                                    <div class="blog-socials">
+                                        <span class="blog-socials-item">
+
+                                        </span>
+                                        <span class="blog-socials-item">
+
+                                        </span>
+                                        <span class="blog-socials-item">
+
+                                        </span>
+                                        <span class="blog-socials-item">
+
+                                        </span>
+                                        <span class="blog-socials-item">
+
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="blog-in__share-right">
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -7,7 +7,6 @@
 
 .container-fluid
     padding: 0 25px
-    padding: 0 25px
     width: 100%
     +respond-to(lg)
         padding: 0 15px
@@ -42,6 +41,48 @@
     .xlg-width-#{$widthName}
         +respond-to(xlg)
             width: unquote("#{$width}%")
+
+
+    .push-right-#{$widthName}
+        margin-right: unquote("#{$width}%")
+
+    .sm-push-right-#{$widthName}
+        +respond-to(sm)
+            margin-right: unquote("#{$width}%")
+
+    .md-push-right-#{$widthName}
+        +respond-to(md)
+            margin-right: unquote("#{$width}%")
+
+    .lg-push-right-#{$widthName}
+        +respond-to(lg)
+            margin-right: unquote("#{$width}%")
+
+    .xlg-push-right-#{$widthName}
+        +respond-to(xlg)
+            margin-right: unquote("#{$width}%")
+
+    .push-left-#{$widthName}
+        margin-left: unquote("#{$width}%")
+
+
+    .sm-push-left-#{$widthName}
+        +respond-to(sm)
+            margin-left: unquote("#{$width}%")
+
+    .md-push-left-#{$widthName}
+        +respond-to(md)
+            margin-left: unquote("#{$width}%")
+
+    .lg-push-left-#{$widthName}
+        +respond-to(lg)
+            margin-left: unquote("#{$width}%")
+
+    .xlg-push-left-#{$widthName}
+        +respond-to(xlg)
+            margin-left: unquote("#{$width}%")
+
+
 
 @each $value in 0, 15, 20, 30, 40, 50
     .grid-#{$value}

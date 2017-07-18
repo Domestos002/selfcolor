@@ -4,3 +4,53 @@
 .blog-in-header
     border-bottom: 1px solid #d7d7d7
     padding: 20px 50px
+
+.blog-in__hero-contain
+    max-width: 485px
+    margin: 0 auto
+    text-align: center
+
+.blog-in__date
+    color: $lightgrey
+
+.blog-in-body
+    padding: 20px 25px
+
+.blog-in__text-block
+    padding: 35px 8.333%
+
+.blog-in__hero
+    background-image: url(http://lorempixel.com/930/580/)
+    -webkit-background-size: cover
+    background-size: cover
+    background-repeat: no-repeat
+    background-position: center center
+    min-height: 580px
+    z-index: 2
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 100%
+    position: relative
+    &::after
+        content: ''
+        background-color: rgba(0, 0, 0, 0.4)
+        position: absolute
+        top: 0
+        z-index: -1
+        left: 0
+        right: 0
+        bottom: 0
+
+.blog-in__img
+    width: 100%
+    img
+        width: 100%
+        object-fit: cover
+
+.blog-in__gallery-block
+    +fluid-columns(2, 20px, 20px)
+
+.blog-in__gallery-item
+    img
+        width: 100%
