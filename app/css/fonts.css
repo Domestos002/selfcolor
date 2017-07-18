@@ -1,2 +1,40 @@
+@font-face {
+  font-family: 'FontAwesome';
+  src: url("../fonts/fontawesome-webfont.woff2") format("woff2"),url("../fonts/fontawesome-webfont.woff") format("woff"),url("../fonts/fontawesome-webfont.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 
-/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiIiwic291cmNlcyI6WyJmb250cy5jc3MiXSwic291cmNlc0NvbnRlbnQiOlsiIl0sImZpbGUiOiJmb250cy5jc3MifQ== */
+@font-face {
+  font-family: "fontello";
+  src: url("../fonts/fontello.eot");
+  src: url("../fonts/fontello.eot?#iefix") format("embedded-opentype"),url("../fonts/fontello.woff") format("woff"),url("../fonts/fontello.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GothamPro";
+  src: url("../fonts/GothamPro.eot");
+  src: url("../fonts/GothamPro.eot?#iefix") format("embedded-opentype"),url("../fonts/GothamPro.woff") format("woff"),url("../fonts/GothamPro.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GothamPro-Bold";
+  src: url("../fonts/GothamPro-Bold.eot");
+  src: url("../fonts/GothamPro-Bold.eot?#iefix") format("embedded-opentype"),url("../fonts/GothamPro-Bold.woff") format("woff"),url("../fonts/GothamPro-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "GothamPro-Medium";
+  src: url("../fonts/GothamPro-Medium.eot");
+  src: url("../fonts/GothamPro-Medium.eot?#iefix") format("embedded-opentype"),url("../fonts/GothamPro-Medium.woff") format("woff"),url("../fonts/GothamPro-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiIiwic291cmNlcyI6WyJmb250cy5jc3MiXSwic291cmNlc0NvbnRlbnQiOlsiQGZvbnQtZmFjZXtmb250LWZhbWlseTonRm9udEF3ZXNvbWUnO3NyYzp1cmwoXCIuLi9mb250cy9mb250YXdlc29tZS13ZWJmb250LndvZmYyXCIpIGZvcm1hdChcIndvZmYyXCIpLHVybChcIi4uL2ZvbnRzL2ZvbnRhd2Vzb21lLXdlYmZvbnQud29mZlwiKSBmb3JtYXQoXCJ3b2ZmXCIpLHVybChcIi4uL2ZvbnRzL2ZvbnRhd2Vzb21lLXdlYmZvbnQudHRmXCIpIGZvcm1hdChcInRydWV0eXBlXCIpO2ZvbnQtd2VpZ2h0Om5vcm1hbDtmb250LXN0eWxlOm5vcm1hbH1AZm9udC1mYWNle2ZvbnQtZmFtaWx5OlwiZm9udGVsbG9cIjtzcmM6dXJsKFwiLi4vZm9udHMvZm9udGVsbG8uZW90XCIpO3NyYzp1cmwoXCIuLi9mb250cy9mb250ZWxsby5lb3Q/I2llZml4XCIpIGZvcm1hdChcImVtYmVkZGVkLW9wZW50eXBlXCIpLHVybChcIi4uL2ZvbnRzL2ZvbnRlbGxvLndvZmZcIikgZm9ybWF0KFwid29mZlwiKSx1cmwoXCIuLi9mb250cy9mb250ZWxsby50dGZcIikgZm9ybWF0KFwidHJ1ZXR5cGVcIik7Zm9udC13ZWlnaHQ6bm9ybWFsO2ZvbnQtc3R5bGU6bm9ybWFsfUBmb250LWZhY2V7Zm9udC1mYW1pbHk6XCJHb3RoYW1Qcm9cIjtzcmM6dXJsKFwiLi4vZm9udHMvR290aGFtUHJvLmVvdFwiKTtzcmM6dXJsKFwiLi4vZm9udHMvR290aGFtUHJvLmVvdD8jaWVmaXhcIikgZm9ybWF0KFwiZW1iZWRkZWQtb3BlbnR5cGVcIiksdXJsKFwiLi4vZm9udHMvR290aGFtUHJvLndvZmZcIikgZm9ybWF0KFwid29mZlwiKSx1cmwoXCIuLi9mb250cy9Hb3RoYW1Qcm8udHRmXCIpIGZvcm1hdChcInRydWV0eXBlXCIpO2ZvbnQtd2VpZ2h0Om5vcm1hbDtmb250LXN0eWxlOm5vcm1hbH1AZm9udC1mYWNle2ZvbnQtZmFtaWx5OlwiR290aGFtUHJvLUJvbGRcIjtzcmM6dXJsKFwiLi4vZm9udHMvR290aGFtUHJvLUJvbGQuZW90XCIpO3NyYzp1cmwoXCIuLi9mb250cy9Hb3RoYW1Qcm8tQm9sZC5lb3Q/I2llZml4XCIpIGZvcm1hdChcImVtYmVkZGVkLW9wZW50eXBlXCIpLHVybChcIi4uL2ZvbnRzL0dvdGhhbVByby1Cb2xkLndvZmZcIikgZm9ybWF0KFwid29mZlwiKSx1cmwoXCIuLi9mb250cy9Hb3RoYW1Qcm8tQm9sZC50dGZcIikgZm9ybWF0KFwidHJ1ZXR5cGVcIik7Zm9udC13ZWlnaHQ6bm9ybWFsO2ZvbnQtc3R5bGU6bm9ybWFsfUBmb250LWZhY2V7Zm9udC1mYW1pbHk6XCJHb3RoYW1Qcm8tTWVkaXVtXCI7c3JjOnVybChcIi4uL2ZvbnRzL0dvdGhhbVByby1NZWRpdW0uZW90XCIpO3NyYzp1cmwoXCIuLi9mb250cy9Hb3RoYW1Qcm8tTWVkaXVtLmVvdD8jaWVmaXhcIikgZm9ybWF0KFwiZW1iZWRkZWQtb3BlbnR5cGVcIiksdXJsKFwiLi4vZm9udHMvR290aGFtUHJvLU1lZGl1bS53b2ZmXCIpIGZvcm1hdChcIndvZmZcIiksdXJsKFwiLi4vZm9udHMvR290aGFtUHJvLU1lZGl1bS50dGZcIikgZm9ybWF0KFwidHJ1ZXR5cGVcIik7Zm9udC13ZWlnaHQ6bm9ybWFsO2ZvbnQtc3R5bGU6bm9ybWFsfVxuIl0sImZpbGUiOiJmb250cy5jc3MifQ== */

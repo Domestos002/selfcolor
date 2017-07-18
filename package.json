@@ -27,5 +27,8 @@
     "useref": "^1.2.0",
     "wiredep": "^4.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "gulp-group-css-media-queries": "^1.2.0",
+    "gulp-uncss": "^1.0.6"
+  }
 }

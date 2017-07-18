@@ -1,0 +1,25 @@
+<div class="blog-masonry__item-wrapper">
+    <div class="blog-masonry__item">
+        <div class="blog-masonry__item-img">
+            <img src="http://lorempixel.com/280/200/" alt="">
+            <div class="blog-masonry__item-overlay">
+                {% include "blog-masonry-author.twig" %}
+                <div class="blog-masonry__item-footer">
+                    {% include "blog-masonry-index.twig" %}
+                </div>
+            </div>
+        </div>
+        <div class="blog-masonry__item-caption">
+            {% if length == 'short' %}
+                <p>
+                    Lorem ipsum dolor sit amet.
+                </p>
+            {% endif %}
+            {% if length == 'large' %}
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, hic.
+                </p>
+            {% endif %}
+        </div>
+    </div>
+</div>

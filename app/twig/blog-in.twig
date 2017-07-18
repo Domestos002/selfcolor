@@ -1,0 +1,36 @@
+{% extends "layouts/app.twig" %}
+
+{% block pageTitle %}Главная страница{% endblock %}
+
+{% block content %}
+    <main class="page-main">
+        <section class="">
+            <div class="container">
+                <div class="section-inner">
+                    <div class="blog-in">
+                        <div class="blog-in-header fx fx-justify fx-middle">
+                            <div class="blog-in__author fx fx-left">
+                                <span class="blog-author-img mr-20">
+                                    <img src="http://lorempixel.com/40/40" alt="">
+                                </span>
+                                <div class="blog-in__author-text">
+                                    <div class="fz16 mb10 text-medium">
+                                        <p>Ксандер Хайрез</p>
+                                    </div>
+                                    <div class="fz16">
+                                        <p>Мастер тату</p>
+                                    </div>
+                                    <div class="text-grey">
+                                        <p>Воронеж, Россиия</p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% include "elements/blog-masonry-index.twig"%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock %}

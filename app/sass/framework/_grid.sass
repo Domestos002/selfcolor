@@ -1,42 +1,98 @@
 .container
-	margin: 0 auto
-	max-width: $content-width
-	padding: $content-indent
+    margin: 0 auto
+    max-width: $content-width
+    padding: 0 25px
+    +respond-to(lg)
+        padding: 0 15px
 
 .container-fluid
-	padding: $content-indent
-	width: 100%
+    padding: 0 25px
+    padding: 0 25px
+    width: 100%
+    +respond-to(lg)
+        padding: 0 15px
 
 .grid
-	display: flex
-	flex-wrap: wrap
+    display: flex
+    flex-wrap: wrap
 
 .grid-middle
-	align-items: center
-	
+    align-items: center
+
 @each $value in '1-12_8.333', '2-12_16.666', '3-12_25', '4-12_33.333', '5-12_41.666', '6-12_50', '7-12_58.333', '8-12_66.666', '9-12_75', '10-12_83.333', '11-12_91.666'
-	$values: str_split('#{$value}', '_')
-	$width: nth($values, 2)
-	$widthName: nth($values, 1)
-	
-	.width-#{$widthName}
-		width: unquote("#{$width}%")
-	
-	.sm-width-#{$widthName}
-		+respond-to(sm)
-			width: unquote("#{$width}%")
-	
-	.md-width-#{$widthName}
-		+respond-to(md)
-			width: unquote("#{$width}%")
-	
-	.lg-width-#{$widthName}
-		+respond-to(lg)
-			width: unquote("#{$width}%")
-	
-	.xlg-width-#{$widthName}
-		+respond-to(xlg)
-			width: unquote("#{$width}%")
+    $values: str_split('#{$value}', '_')
+    $width: nth($values, 2)
+    $widthName: nth($values, 1)
+
+    .width-#{$widthName}
+        width: unquote("#{$width}%")
+
+    .sm-width-#{$widthName}
+        +respond-to(sm)
+            width: unquote("#{$width}%")
+
+    .md-width-#{$widthName}
+        +respond-to(md)
+            width: unquote("#{$width}%")
+
+    .lg-width-#{$widthName}
+        +respond-to(lg)
+            width: unquote("#{$width}%")
+
+    .xlg-width-#{$widthName}
+        +respond-to(xlg)
+            width: unquote("#{$width}%")
+
+@each $value in 0, 15, 20, 30, 40, 50
+    .grid-#{$value}
+        margin-left: -#{$value}px
+        margin-top: -#{$value}px
+
+        & > *
+            box-sizing: border-box
+            padding-left: #{$value}px
+            padding-top: #{$value}px
+            display: flex
+
+    .sm-grid-#{$value}
+        +respond-to(sm)
+            margin-left: -#{$value}px
+            margin-top: -#{$value}px
+
+            & > *
+                box-sizing: border-box
+                padding-left: #{$value}px
+                padding-top: #{$value}px
+
+    .md-grid-#{$value}
+        +respond-to(md)
+            margin-left: -#{$value}px
+            margin-top: -#{$value}px
+
+            & > *
+                box-sizing: border-box
+                padding-left: #{$value}px
+                padding-top: #{$value}px
+
+    .lg-grid-#{$value}
+        +respond-to(lg)
+            margin-left: -#{$value}px
+            margin-top: -#{$value}px
+
+            & > *
+                box-sizing: border-box
+                padding-left: #{$value}px
+                padding-top: #{$value}px
+
+    .xlg-grid-#{$value}
+        +respond-to(xlg)
+            margin-left: -#{$value}px
+            margin-top: -#{$value}px
+
+            & > *
+                box-sizing: border-box
+                padding-left: #{$value}px
+                padding-top: #{$value}px
 
 
 

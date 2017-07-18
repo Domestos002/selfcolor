@@ -1,3 +1,5 @@
+'use strict';
+
 (function () {
 
     function YOURAPPNAME(doc) {
@@ -82,13 +84,15 @@
         if (switchers && switchers.length > 0) {
             for (var i = 0; i < switchers.length; i++) {
                 var switcher = switchers[i],
-                    switcherOptions = _self.options(switcher.dataset.switcher),
+                    switcherOptions = _self.options(switcher.dataset["switcher"]),
                     switcherElems = switcher.children,
-                    switcherTargets = _self.doc.querySelector('[data-switcher-target="' + switcherOptions.target + '"]').children;
+                    switcherTargets = _self.doc.querySelector('[data-switcher-target="' + switcherOptions.target + '"]').children,
+                    switchersActive = [];
 
                 for (var y = 0; y < switcherElems.length; y++) {
                     var switcherElem = switcherElems[y],
                         parentNode = switcher.children,
+                        switcherTrigger = switcherElem.children.length ? switcherElem.children[0] : switcherElem,
                         switcherTarget = switcherTargets[y];
 
                     if (switcherElem.classList.contains('active')) {
@@ -98,22 +102,28 @@
                         }
                         switcherElem.classList.add('active');
                         switcherTarget.classList.add('active');
-                    }
+                    } else switchersActive.push(0);
 
-                    switcherElem.children[0].addEventListener('click', function (elem, target, parent, targets) {
+                    switcherTrigger.addEventListener('click', function (elem, target, parent, targets) {
                         return function (e) {
                             e.preventDefault();
+
                             if (!elem.classList.contains('active')) {
-                                for (var z = 0; z < parentNode.length; z++) {
-                                    parent[z].classList.remove('active');
-                                    targets[z].classList.remove('active');
+                                for (var _z = 0; _z < elem.parentNode.children.length; _z++) {
+                                    elem.parentNode.children[_z].classList.remove('active');
+                                    targets[_z].classList.remove('active');
                                 }
                                 elem.classList.add('active');
                                 target.classList.add('active');
                             }
                         };
-
                     }(switcherElem, switcherTarget, parentNode, switcherTargets));
+
+                }
+
+                if (switchersActive.length === switcherElems.length) {
+                    switcherElems[0].classList.add('active');
+                    switcherTargets[0].classList.add('active');
                 }
             }
         }
@@ -122,16 +132,13 @@
     YOURAPPNAME.prototype.str2json = function (str, notevil) {
         try {
             if (notevil) {
-                return JSON.parse(str
-                    .replace(/([\$\w]+)\s*:/g, function (_, $1) {
-                        return '"' + $1 + '":';
-                    })
-                    .replace(/'([^']+)'/g, function (_, $1) {
-                        return '"' + $1 + '"';
-                    })
-                );
+                return JSON.parse(str.replace(/([\$\w]+)\s*:/g, function (_, $1) {
+                    return '"' + $1 + '":';
+                }).replace(/'([^']+)'/g, function (_, $1) {
+                    return '"' + $1 + '"';
+                }));
             } else {
-                return (new Function("", "var json = " + str + "; return JSON.parse(JSON.stringify(json));"))();
+                return new Function("", "const json = " + str + "; return JSON.parse(JSON.stringify(json));")();
             }
         } catch (e) {
             return false;
@@ -141,82 +148,32 @@
     YOURAPPNAME.prototype.options = function (string) {
         var _self = this;
 
-        if (typeof string != 'string') return string;
+        if (typeof string !== 'string') return string;
 
-        if (string.indexOf(':') != -1 && string.trim().substr(-1) != '}') {
+        if (string.indexOf(':') !== -1 && string.trim().substr(-1) !== '}') {
             string = '{' + string + '}';
         }
 
-        var start = (string ? string.indexOf("{") : -1), options = {};
+        var start = string ? string.indexOf("{") : -1,
+            options = {};
 
-        if (start != -1) {
+        if (start !== -1) {
             try {
                 options = _self.str2json(string.substr(start));
-            } catch (e) {
-            }
+            } catch (e) {}
         }
 
         return options;
-    };
-
-    YOURAPPNAME.prototype.formStyler = function () {
-        const _self = this;
-        const stylerVars = {
-            inputs: $('input'),
-            checkboxes: [],
-            radio: []
-        };
-        const styler = {
-            init: function () {
-                styler.sorting();
-                styler.checkbox(stylerVars.checkboxes);
-                styler.radio(stylerVars.radio);
-            },
-            sorting: function () {
-                stylerVars.inputs.each(function () {
-                    var input = $(this);
-
-                    if (this.hasAttribute('data-rendered') || this.hasAttribute('data-no-style'))
-                        return;
-
-                    if (input.attr('type') === 'checkbox') {
-                        stylerVars.checkboxes.push(input);
-                    }
-                    else if (input.attr('type') === 'radio') {
-                        stylerVars.radio.push(input);
-                    }
-                });
-            },
-            checkbox: function (checkboxes) {
-                checkboxes.forEach(function (val, key) {
-                    styler.templateBoxes('checkbox', val);
-                })
-                ;
-            },
-            radio: function (radio) {
-                radio.forEach(function (val, key) {
-                    styler.templateBoxes('radio', val);
-                })
-                ;
-            },
-            templateBoxes: function (template_name, element) {
-                $(element)
-                    .wrap('<span class="input-' + template_name + '"></span>')
-                    .after('<span class="input-' + template_name + '__detector"></span>');
-            }
-        };
-
-        styler.init();
     };
 
     YOURAPPNAME.prototype.popups = function (options) {
         var _self = this;
 
         var defaults = {
-            reachElementClass: '.js-modal',
-            closePopupClass: '.js-close-modal',
-            currentElementClass: '.js-open-modal',
-            changePopupClass: '.js-change-modal'
+            reachElementClass: '.js-popup',
+            closePopupClass: '.js-close-popup',
+            currentElementClass: '.js-open-popup',
+            changePopupClass: '.js-change-popup'
         };
 
         options = $.extend({}, options, defaults);
@@ -233,24 +190,24 @@
         };
 
         plugin.openPopup = function (popupName) {
-            plugin.reachPopups.filter('[data-modal="' + popupName + '"]').addClass('opened');
+            plugin.reachPopups.filter('[data-popup="' + popupName + '"]').addClass('opened');
             plugin.bodyEl.css('overflow-y', 'scroll');
             // plugin.topPanelEl.css('padding-right', scrollSettings.width);
-            plugin.htmlEl.addClass('modal-opened');
+            plugin.htmlEl.addClass('popup-opened');
         };
 
         plugin.closePopup = function (popupName) {
-            plugin.reachPopups.filter('[data-modal="' + popupName + '"]').removeClass('opened');
-            // setTimeout(function () {
-            plugin.bodyEl.removeAttr('style');
-            plugin.htmlEl.removeClass('modal-opened');
-            plugin.topPanelEl.removeAttr('style');
-            // }, 500);
+            plugin.reachPopups.filter('[data-popup="' + popupName + '"]').removeClass('opened');
+            setTimeout(function () {
+                plugin.bodyEl.removeAttr('style');
+                plugin.htmlEl.removeClass('popup-opened');
+                plugin.topPanelEl.removeAttr('style');
+            }, 300);
         };
 
         plugin.changePopup = function (closingPopup, openingPopup) {
-            plugin.reachPopups.filter('[data-modal="' + closingPopup + '"]').removeClass('opened');
-            plugin.reachPopups.filter('[data-modal="' + openingPopup + '"]').addClass('opened');
+            plugin.reachPopups.filter('[data-popup="' + closingPopup + '"]').removeClass('opened');
+            plugin.reachPopups.filter('[data-popup="' + openingPopup + '"]').addClass('opened');
         };
 
         plugin.init = function () {
@@ -260,25 +217,26 @@
         plugin.bindings = function () {
             plugin.openPopupEl.on('click', function (e) {
                 e.preventDefault();
-                var pop = $(this).attr('data-open-modal');
+                var pop = $(this).attr('data-popup-target');
                 plugin.openPopup(pop);
             });
 
             plugin.closePopupEl.on('click', function (e) {
-                var pop;
-                if (this.hasAttribute('data-close-modal')) {
-                    pop = $(this).attr('data-close-modal');
+                e.preventDefault();
+
+                var pop = void 0;
+                if (this.hasAttribute('data-popup-target')) {
+                    pop = $(this).attr('data-popup-target');
                 } else {
-                    pop = $(this).closest(options.reachElementClass).attr('data-modal');
+                    pop = $(this).closest(options.reachElementClass).attr('data-popup');
                 }
 
                 plugin.closePopup(pop);
             });
 
             plugin.changePopupEl.on('click', function (e) {
-                e.preventDefault();
-                var closingPop = $(this).attr('data-closing-modal');
-                var openingPop = $(this).attr('data-opening-modal');
+                var closingPop = $(this).attr('data-closing-popup');
+                var openingPop = $(this).attr('data-opening-popup');
 
                 plugin.changePopup(closingPop, openingPop);
             });
@@ -287,70 +245,58 @@
                 var target = $(e.target);
                 var className = options.reachElementClass.replace('.', '');
                 if (target.hasClass(className)) {
-                    plugin.closePopup($(e.target).attr('data-modal'));
+                    plugin.closePopup($(e.target).attr('data-popup'));
                 }
             });
         };
 
-        if (options)
-            plugin.init();
+        if (options) plugin.init();
 
         return plugin;
     };
 
-    YOURAPPNAME.prototype.headerChange = function () {
-        var $header = $('.header__top-line');
-        headerDetect($(window));
-        $(window).scroll(function (e) {
-            headerDetect($(this));
-        });
+    YOURAPPNAME.prototype.parallax = function (selector) {
+        var blocks = $(selector);
 
-        function headerDetect($window) {
-            if ($window.scrollTop() > 0) {
-                $header.addClass('fixed');
-            } else {
-                $header.removeClass('fixed');
-            }
+        function renderTemplate($blocks) {
+            $blocks.each(function () {
+                var $this = $(this);
+
+                if ($this.next('[data-parallax-placeholder]').length < 1) {
+                    var $bg = $this.css('background-image');
+                    $this.removeAttr('style').addClass('parallax-gradient');
+                    var $placeholder = $('<div data-parallax-placeholder></div>');
+                    $placeholder.css({
+                        'background-image': $bg
+                    });
+                    $this.before($placeholder);
+                }
+            });
         }
-    };
 
-    YOURAPPNAME.prototype.accordion = function (selector) {
-        var accordion = $(selector);
-        accordion.find('[data-title]').on('click', function (e) {
-            e.preventDefault();
-            var $this = $(this);
-            if ($this.parent().hasClass('active')) {
-                $this.parent().removeClass('active')
-                $this.next().slideUp(300);
-            } else {
-                $this.closest('[data-item]').siblings().removeClass('active').find('[data-content]').slideUp(300);
-                $this.next().stop().slideDown(300).parent().addClass('active');
-            }
+        function renderOffset() {
+            var $scrollTop = $(window).scrollTop();
+
+            blocks.each(function () {
+                var $this = $(this);
+                var $content = $('.content');
+                var $mt = $content.css('margin-top');
+                var $ml = $content.css('margin-left');
+
+                $this.prev('[data-parallax-placeholder]').css({
+                    height: $this.outerHeight(),
+                    top: $mt,
+                    left: $ml
+                });
+            });
+        }
+
+        $(window).resize(function () {
+            renderOffset();
         });
-    };
 
-    YOURAPPNAME.prototype.menu = function () {
-        $('.js-open-menu').on('click', function (e) {
-            e.preventDefault();
-            $('html').addClass('menu-opened');
-        });
-
-        $('.js-close-menu').on('click', function (e) {
-            e.preventDefault();
-            $('html').removeClass('menu-opened');
-        });
-    };
-
-    YOURAPPNAME.prototype.fileInput = function () {
-        var input = $('[data-file-container] input[type="file"]');
-        input.on('change', function () {
-            var wrapper = $(this).parent('[data-file-container]');
-            var str = $(this).val();
-
-            var file = str.split(/(\\|\/)/g).pop();
-
-            wrapper.find('[data-file-name]').text(file);
-        });
+        renderTemplate(blocks);
+        renderOffset();
     };
 
     var app = new YOURAPPNAME(document);
@@ -365,19 +311,86 @@
         // DOM is loaded! Paste your app code here (Pure JS code).
         // Do not use jQuery here cause external libs do not loads here...
 
-        app.initSwitcher(); // data-switcher="{target='anything'}" , data-switcher-target="anything"
+        app.initSwitcher(); // data-switcher="{target: 'anything'}" , data-switcher-target="anything"
     });
 
-    app.appLoad('full', function (e) {
-
-        app.accordion('[data-accordion]');
-        app.headerChange();
-
-        app.menu();
-
+    app.appLoad('full', function () {
+        console.log('App was fully load! Paste external app source code here... For example if your use jQuery and something else');
+        // App was fully load! Paste external app source code here... 4example if your use jQuery and something else
+        // Please do not use jQuery ready state function to avoid mass calling document event trigger!
         app.popups();
-        app.formStyler();
-        app.fileInput();
-    });
+        lightbox.option({
+            'resizeDuration': 200,
+            'fadeDuration': 300
+        });
+        app.parallax('[data-parallax]');
+        $(".dropdown-toggle").click(function () {
+            $(this).parents(".wrapper").siblings(".dropdown").addClass("active");
+            $(this).parents(".wrapper").siblings(".dropdown-overlay").addClass("active");
+            $(this).addClass("active");
+        });
 
+        $(".dropdown-overlay").click(function () {
+            $(this).siblings(".wrapper").find(".dropdown-toggle").removeClass("active");
+            $(this).siblings(".dropdown").removeClass("active");
+            $(this).removeClass("active");
+        });
+
+
+
+        $(window).resize(function () {
+
+        });
+
+        $('.navigation__item.navigation__item--sub > .navigation__link').click(function (e) {
+            e.preventDefault();
+
+            var $link = $(this);
+            var $parentListItem = $link.parent();
+            var parentListItemClass = 'navigation__item--active';
+
+            if ($parentListItem.hasClass(parentListItemClass)) {
+                $parentListItem.removeClass(parentListItemClass);
+            } else {
+                $parentListItem.addClass(parentListItemClass);
+            }
+        });
+
+        $('.navigation__item.navigation__item--back .navigation__link').click(function (e) {
+            e.preventDefault();
+
+            var $link = $(this);
+            var $parentListItem = $link.closest('.navigation__item.navigation__item--sub');
+
+            $parentListItem.removeClass('navigation__item--active');
+        });
+
+        $('.header__toggle > a.toggle-header').click(function (e) {
+            e.preventDefault();
+
+            var $trigger = $(this);
+            var $header = $trigger.closest('.header');
+            var headerActiveClass = 'header--active';
+            var $headerContent = $header.find('.header__content');
+            var headerContentActiveClass = 'header__content--active';
+
+            if ($headerContent.hasClass(headerContentActiveClass)) {
+                $headerContent.removeClass(headerContentActiveClass);
+                $header.removeClass(headerActiveClass);
+                $(document.querySelector('html')).removeClass('menu-opened');
+            } else {
+                $headerContent.addClass(headerContentActiveClass);
+                $header.addClass(headerActiveClass);
+                $(document.querySelector('html')).addClass('menu-opened');
+            }
+        });
+
+        $('.js-lightbox').click(function (e) {
+            e.preventDefault();
+
+            $reviewVkCarousel.trigger('to.owl.carousel', parseInt($(this).attr('href').replace('#', '')));
+
+            app.popups().openPopup('popup-lightbox');
+        });
+    });
 })();

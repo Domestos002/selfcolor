@@ -4,16 +4,33 @@
 			@content
 	
 	@else if $media == md
-		@media only screen and (min-width: $small) and (max-width: $b-medium)
+		@media only screen and (max-width: $b-medium)
 			@content
 	
 	@else if $media == lg
-		@media only screen and (min-width: $medium) and (max-width: $b-large)
+		@media only screen and (max-width: $b-large)
 			@content
 	
 	@else if $media == xlg
-		@media only screen and (min-width: $large) and (max-width: $xlarge)
+		@media only screen and (max-width: $xlarge)
 			@content
+			
+//@mixin respond-to($media)
+//	@if $media == sm
+//		@media only screen and (max-width: $b-small)
+//			@content
+//
+//	@else if $media == md
+//		@media only screen and (min-width: $small) and (max-width: $b-medium)
+//			@content
+//
+//	@else if $media == lg
+//		@media only screen and (min-width: $medium) and (max-width: $b-large)
+//			@content
+//
+//	@else if $media == xlg
+//		@media only screen and (min-width: $large) and (max-width: $xlarge)
+//			@content
 
 
 =trans($trans: all 0.3s ease 0s)

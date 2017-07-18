@@ -4,5 +4,11 @@
   "description": "Gulp project builder",
   "author": "qube.kz",
   "dependencies": {
+    "reset-css": "^2.2.0",
+    "uikit": "^2.27.4",
+    "jquery": "^3.2.1",
+    "bootstrap-sass": "^3.3.7",
+    "lightbox2": "^2.9.0",
+    "jquery.stellar": "stellar#^0.6.2"
   }
 }

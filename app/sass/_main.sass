@@ -1,4 +1,75 @@
-body
-	background-color: tomato
-	+respond-to(md)
-		background-color: lime
+.bordered-pane
+	border: 5px solid $brand
+	background-color: rgba(0, 0, 0, 0.22)
+	box-shadow: 4px 3px 0 rgba(0, 0, 0, 0.24)
+	max-width: 550px
+	margin: 0 auto
+	padding: 30px 40px
+	
+.bprz
+	background-image: url(../images/bg-popup.jpg)
+	-webkit-background-size: cover
+	background-size: cover
+	background-repeat: no-repeat
+	
+	
+.order-item__count
+	position: absolute
+	left: 0
+	top: 0
+	width: 35px
+	height: 35px
+	line-height: 35px
+	background-color: $brand
+	color: $black
+	text-align: center
+	font-family: $font-base-bold
+
+.order-item__img
+	position: relative
+	width: 83px
+	height: 83px
+	img
+		position: absolute
+		right: 0
+		bottom: 0
+		width: 65px
+		height: 65px
+	
+.order-list
+	+fluid-columns(3, 70px, 35px)
+	
+.maw900
+	max-width: 900px
+	margin: 0 auto
+	
+.black-bg
+	background-color: $black
+
+.samples-item
+	img
+		width: 100%
+	
+.samples-list
+	+fluid-columns(4, 20px, 20px)
+	
+.contacts__form
+	
+	.form-inner
+		height: 45px
+	input
+		height: 45px
+		
+	.btn
+		flex-grow: 1
+		
+.contacts__form-item
+	&:not(:last-child)
+		width: 100%
+		max-width: 400px
+		margin-right: 20px
+		
+.schedule-table
+	margin-left: -4px
+	td
+		padding: 4px

@@ -1,35 +1,37 @@
 /* DEV PLUGINS------------------------------------------------------------------
  ---------------------------------------------------------------------------- */
-var gulp = require('gulp'),
+const gulp = require('gulp'),
     plumber = require('gulp-plumber'),
     pug = require('gulp-pug'),
     twig = require('gulp-twig'),
     babel = require('gulp-babel'),
     sass = require("gulp-sass"),
     prefix = require("gulp-autoprefixer"),
+    gcmq = require('gulp-group-css-media-queries'),
     minifyCss = require('gulp-minify-css'),
     uglify = require('gulp-uglify'),
     sourcemaps = require("gulp-sourcemaps"),
     callback = require('gulp-callback'),
     clean = require('gulp-clean'),
-    notify = require('gulp-notify'),
+    spritesmith = require("gulp.spritesmith"),
+    uncss = require('gulp-uncss'),
     browserSync = require('browser-sync');
-    // compass = require('gulp-compass');
 
 /* PRODUCTION PLUGINS ----------------------------------------------------------
  ---------------------------------------------------------------------------- */
-var useref = require('gulp-useref'),
+const useref = require('gulp-useref'),
     wiredep = require('wiredep').stream,
     gulpif = require('gulp-if');
 
 /* SOURCES --------------------------------------------------------------------
  ---------------------------------------------------------------------------- */
-var sources = {
+const sources = {
     html: {
         src: 'app/*.html',
         dist: 'app/'
     },
     css: {
+        src: 'app/css/*.css',
         dist: 'app/css'
     },
     js: {
@@ -70,7 +72,7 @@ var sources = {
 /* Error Handler ---------------------------------------------------------------
  ---------------------------------------------------------------------------- */
 
-var onError = function (err) {
+const onError = function (err) {
     console.log(err);
     this.emit('end');
 };
@@ -86,7 +88,6 @@ gulp.task('pug', function () {
         }))
         .pipe(gulp.dest(sources.pug.dist))
         .pipe(browserSync.reload({stream: true}));
-    // .pipe(notify('PUG was compiled'));
 });
 
 /* TWIG --------------------------------------------------------------------- */
@@ -110,25 +111,6 @@ gulp.task('twig', function () {
     return null;
 });
 
-// /* COMPASS ------------------------------------------------------------------ */
-// gulp.task('compass', function () {
-//     gulp.src(sources.sass.watch)
-//         .pipe(plumber())
-//         .pipe(compass({
-//             sass: sources.sass.dist,
-//             css: sources.css.dist,
-//             js: sources.js.dist,
-//             image: 'app/images',
-//             source: true
-//         }))
-//         .pipe(prefix({
-//             browsers: ['last 2 versions'],
-//             cascade: false
-//         }))
-//         .pipe(gulp.dest(sources.css.dist))
-//         .pipe(browserSync.reload({stream: true}));
-// });
-
 /* SASS --------------------------------------------------------------------- */
 gulp.task('sass', function () {
     return gulp.src(sources.sass.src)
@@ -137,16 +119,39 @@ gulp.task('sass', function () {
         }))
         .pipe(sass({outputStyle: 'compressed'}))
         .pipe(prefix({
-            browsers: ['last 2 versions'],
+            browsers: ['>0%'],
             cascade: false
         }))
         .pipe(sourcemaps.init())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(sources.css.dist))
-        .pipe(browserSync.reload({stream: true}));
-    // .pipe(notify('SASS was compiled'));
 });
 
+/* Combine media queries ----------------------------------------------------- */
+gulp.task('gcmq', ['sass'], function () {
+    gulp.src(sources.css.src)
+        .pipe(plumber({
+            errorHandler: onError
+        }))
+        .pipe(gcmq())
+        .pipe(gulp.dest(sources.css.dist))
+        .pipe(browserSync.reload({stream: true}));
+});
+
+/* Sprites ------------------------------------------------------------------- */
+gulp.task('sprite', function () {
+    const spriteData = gulp.src(sources.images.icons.default)
+        .pipe(spritesmith({
+            imgName: 'sprite.png',
+            imgPath: '../images/sprite.png',
+            cssName: '_sprite.sass'
+        }));
+
+    spriteData.css.pipe(gulp.dest(sources.sass.dist));
+    spriteData.img.pipe(gulp.dest(sources.images.dist));
+});
+
+/* ES6 to ES5 ---------------------------------------------------------------- */
 gulp.task('es6', function () {
     return gulp.src(sources.js.es6_watch)
         .pipe(plumber())
@@ -184,6 +189,15 @@ gulp.task('sftp', function () {
             pass: "",
             remotePath: ""
         }));
+});
+
+/* CLEAN CSS ----------------------------------------------------------------- */
+gulp.task('clean_css', function () {
+    return gulp.src('dist/css/common.css')
+        .pipe(uncss({
+            html: ['dist/*.html']
+        }))
+        .pipe(gulp.dest('dist/css/cleaned'));
 });
 
 /* CLEAN -------------------------------------------------------------------- */
@@ -233,11 +247,11 @@ gulp.task('images', function () {
  ---------------------------------------------------------------------------- */
 gulp.task('watch', function () {
     // gulp.watch('bower.json', ["bower"]);
-    gulp.watch(sources.sass.watch);
+    gulp.watch(sources.sass.watch, ['gcmq']);
     // gulp.watch(sources.pug.watch, ["pug"]);
     gulp.watch(sources.twig.watch, ["twig"]);
     gulp.watch(sources.js.es6_watch, ['es6']);
     gulp.watch(sources.js.watch).on('change', browserSync.reload);
 });
 
-gulp.task('default', ['browser-sync', 'es6', 'twig', 'watch']);
+gulp.task('default', ['browser-sync', 'es6', 'twig', 'gcmq', 'watch']);

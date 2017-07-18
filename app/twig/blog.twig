@@ -1,0 +1,34 @@
+{% extends "layouts/app.twig" %}
+
+{% block pageTitle %}Главная страница{% endblock %}
+
+{% block content %}
+    <main class="page-main">
+        <section>
+            <div class="container">
+                <div class="section-inner">
+                    <div class="blog-masonry">
+                        <div class="blog-masonry__list mb-30">
+                            {% include "elements/blog-masonry-item-big.twig" %}
+                            <div class="blog-masonry__searchbar">
+                                <div class="input-wrapper fxg1">
+                                    <input type="text">
+                                </div>
+                                <button class="btn btn-primary">Найти</button>
+                            </div>
+                            {% include "elements/blog-masonry-item.twig" with {"length": "short"} %}
+                            {% include "elements/blog-masonry-item.twig" with {"length": "large"} %}
+                            {% include "elements/blog-masonry-item.twig" with {"length": "short"} %}
+                            {% include "elements/blog-masonry-item.twig" with {"length": "large"} %}
+                            {% include "elements/blog-masonry-item-big.twig"%}
+                            {% include "elements/blog-masonry-item-big.twig"%}
+                            {% include "elements/blog-masonry-item-big.twig"%}
+                        </div>
+                        <span class="blog-masonry__next-btn">Показать еще</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{% endblock %}

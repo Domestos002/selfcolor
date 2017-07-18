@@ -1,0 +1,138 @@
+.blog-author-img
+    margin-right: 15px
+    width: 40px
+    height: 40px
+    border-radius: 100%
+    overflow: hidden
+    display: inline-block
+
+.blog-masonry__item-caption
+    font-size: 18px
+    font-family: $font-base-med
+
+.mr-8
+    margin-right: 8px
+    margin-right: 8px
+
+.blog-index__item-count
+    font-size: 12px
+    font-family: $font-base-med
+    color: $grey
+
+.blog-masonry__index-img
+    margin-right: 8px
+
+.blog-masonry__list
+    display: flex
+    align-items: stretch
+    flex-wrap: wrap
+    position: relative
+    margin-left: -20px
+    margin-top: -30px
+    overflow: hidden
+
+.blog-masonry__item-wrapper
+    padding-left: 20px
+    padding-top: 30px
+    width: 25%
+    &-big
+        width: 50%
+    &:nth-child(3), &:nth-child(4)
+        margin-top: 70px
+
+.blog-masonry__item
+    height: 100%
+    overflow: hidden
+    &-big
+        padding: 90px 30px 30px 30px
+        background-image: url(http://lorempixel.com/580/360/)
+        background-repeat: no-repeat
+        background-position: center center
+        -webkit-background-size: cover
+        background-size: cover
+        position: relative
+        display: flex
+        z-index: 2
+        flex-direction: column
+        justify-content: space-between
+        &::after
+            content: ''
+            background-color: rgba(0, 0, 0, 0.4)
+            position: absolute
+            top: 0
+            z-index: -1
+            left: 0
+            right: 0
+            bottom: 0
+
+//BIG
+.blog-masonry__item-title
+    color: $lightgrey
+    font-size: 30px
+    text-align: center
+    font-family: $font-base-bold
+
+.blog-masonry__item-date
+    font-size: 12px
+    color: $lightgrey
+    width: 100%
+    text-align: center
+    display: block
+
+.blog-masonry__item-author
+    font-family: $font-base-med
+    display: flex
+    justify-content: flex-start
+
+.blog-masonry__item-img
+    position: relative
+    line-height: 0
+    margin-bottom: 22px
+    +trans()
+    &:hover
+        .blog-masonry__item-overlay
+            display: flex
+            height: 100%
+            width: 100%
+
+
+.blog-index__item
+    &:not(:last-child)
+        margin-right: 20px
+
+.blog-masonry__item-overlay
+    justify-content: space-between
+    flex-direction: column
+    padding: 20px
+    height: 0
+    width: 0
+    display: none
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background-color: rgba(0, 0, 0, 0.4)
+    //transform: translate(-50%, -50%)
+    transition: all 0.3s ease 0s
+
+.blog-masonry__searchbar
+    width: calc(50% - 20px)
+    display: flex
+    position: absolute
+    right: 0
+    justify-content: flex-end
+    top: 30px
+    .input-wrapper
+        margin-right: 20px
+
+
+.blog-masonry__next-btn
+    line-height: 70px
+    width: 100%
+    background-color: #252525
+    text-align: center
+    font-size: 12px
+    display: inline-block
+    color: #fff
+    cursor: pointer

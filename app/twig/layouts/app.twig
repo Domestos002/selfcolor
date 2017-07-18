@@ -24,31 +24,31 @@
     {#<div class="modal js-modal" data-modal="sample">#}
         {#<h>Modal</h>#}
     {#</div>#}
-    <div class="modal-wrapper js-modal" data-modal="sample">
-        <div class="modal login-modal">
-            <div class="modal-close js-close-modal">
-                <i class="icon-cross"></i>
-            </div>
-            <div class="text-bold fz25 mb20 text-center">Восстановление пароля</div>
-            <form action="#">
-                <div class="form-line mb20">
-                    <p class="mb10">Ваш E-mail</p>
-                    <div>
-                        <input type="text" class="standard-input" name="email" placeholder="E-mail">
-                    </div>
-                </div>
-                <div class="form-line text-center mb20">
-                    <button class="button button-red button-long button-medium">Восстановить</button>
-                </div>
-                <div class="form-line text-center mb20">
-                    <a href="#" class="link-black js-change-modal" data-opening-modal="login" data-closing-modal="password-recover">Вход</a>
-                </div>
-                <div class="form-line text-center">
-                    <a href="#" class="link-black js-change-modal" data-opening-modal="registration" data-closing-modal="password-recover">Регистрация</a>
-                </div>
-            </form>
-        </div>
-    </div>
+    {#<div class="modal-wrapper js-modal" data-modal="sample">#}
+        {#<div class="modal login-modal">#}
+            {#<div class="modal-close js-close-modal">#}
+                {#<i class="icon-cross"></i>#}
+            {#</div>#}
+            {#<div class="text-bold fz25 mb20 text-center">Восстановление пароля</div>#}
+            {#<form action="#">#}
+                {#<div class="form-line mb20">#}
+                    {#<p class="mb10">Ваш E-mail</p>#}
+                    {#<div>#}
+                        {#<input type="text" class="standard-input" name="email" placeholder="E-mail">#}
+                    {#</div>#}
+                {#</div>#}
+                {#<div class="form-line text-center mb20">#}
+                    {#<button class="button button-red button-long button-medium">Восстановить</button>#}
+                {#</div>#}
+                {#<div class="form-line text-center mb20">#}
+                    {#<a href="#" class="link-black js-change-modal" data-opening-modal="login" data-closing-modal="password-recover">Вход</a>#}
+                {#</div>#}
+                {#<div class="form-line text-center">#}
+                    {#<a href="#" class="link-black js-change-modal" data-opening-modal="registration" data-closing-modal="password-recover">Регистрация</a>#}
+                {#</div>#}
+            {#</form>#}
+        {#</div>#}
+    {#</div>#}
     <!-- Scripts -->
     {% include "scripts.twig" %}
 </body>

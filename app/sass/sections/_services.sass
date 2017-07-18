@@ -1,0 +1,61 @@
+.services-item__footer
+	background-color: $black
+	text-align: center
+	font-size: 30px
+	color: $brand
+	padding: 15px 20px
+	
+.services-item__body
+	background-color: #a6acb9
+	border-top: 4px solid $brand
+	padding: 15px 20px
+
+.services__list
+	+fluid-columns(4, 20px, 30px)
+	
+.services-item__img
+	line-height: 0
+	font-size: 0
+	img
+		width: 100%
+		
+.we-used__switcher-tabs
+	display: flex
+	li
+		width: 33%
+		display: flex
+		align-items: center
+		text-align: center
+		background-color: $grey
+		height: 47px
+		
+		&:not(:last-child)
+			margin-right: 20px
+		&.active
+			background-color: $black
+			border: 5px solid $brand
+			margin-bottom: -15px
+			height: 60px
+			a
+				
+				color: #fff
+		&:hover:not(.active)
+			background-color: $grey * 0.8
+		a
+			width: 100%
+			line-height: 65px
+			font-size: 20px
+			text-transform: uppercase
+			text-align: center
+			padding: 20px 0
+			color: $black
+		
+.we-used__switcher-tabs
+	height: 55px
+
+.we-used__switcher-content
+	
+	& > li > div
+		padding: 35px 80px
+		border-top: 5px solid $brand
+		background-color: $grey
